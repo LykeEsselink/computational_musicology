@@ -1,5 +1,5 @@
 ---
-title: "index"
+title: "My portfolio"
 author: "Lyke Esselink"
 date: "`r Sys.Date()`"
 output: 
@@ -16,16 +16,31 @@ library(plotly)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### Welcome to my main page!
+# Main page
+
+### Welcome to my main page!{height="65%"}
 
 This is the main page. I can introduce people to my portfolio here.
 
+::: {.card title="Life Expectancy" padding="3px"}
+This is the content.
+:::
+
+## Main page part 2 {height="35%"}
+
+This is the second part of my main page.
+
+
+
 ***
 
-In the sidebar, I can explain more things.
+This sidebar goes on the right of the subsection that we are in.
+
+## {.sidebar}
+This is a general sidebar, on the left of the page. In the sidebar, I can explain more things.
 
 
-### R Markdown
+# R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
