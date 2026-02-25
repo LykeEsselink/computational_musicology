@@ -1,7 +1,6 @@
 ---
 title: "My portfolio"
 author: "Lyke Esselink"
-date: "`r Sys.Date()`"
 output: 
   flexdashboard::flex_dashboard:
     storyboard: true
@@ -9,6 +8,8 @@ output:
 
 ```{r}
 library(plotly)
+library(tidyverse)
+library(compmus)
 ```
 
 
@@ -16,31 +17,21 @@ library(plotly)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Main page
 
-### Welcome to my main page!{height="65%"}
+### Welcome to my main page!
 
 This is the main page. I can introduce people to my portfolio here.
-
-::: {.card title="Life Expectancy" padding="3px"}
-This is the content.
-:::
-
-## Main page part 2 {height="35%"}
-
-This is the second part of my main page.
 
 
 
 ***
 
+
 This sidebar goes on the right of the subsection that we are in.
 
-## {.sidebar}
-This is a general sidebar, on the left of the page. In the sidebar, I can explain more things.
 
 
-# R Markdown
+### R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
@@ -49,6 +40,7 @@ When you click the **Knit** button a document will be generated that includes bo
 ```{r cars}
 summary(cars)
 ```
+
 
 ### Including Plots
 
@@ -60,6 +52,30 @@ plot(pressure)
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
+### Week 8
+
+```{r, echo=FALSE}
+wood <- read_csv("dat/wood.csv")
+
+wood |>
+  compmus_wrangle_chroma() |> 
+  mutate(pitches = map(pitches, compmus_normalise, "euclidean")) |>
+  compmus_gather_chroma() |> 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+```
+
+
 ***
 
-This is a test for the sidebar
+Here is a plot from last week's lab. It shows the chromagram for the "wood" dataset that we could download from the lab notes.
