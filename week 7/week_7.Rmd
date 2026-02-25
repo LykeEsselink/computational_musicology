@@ -1,0 +1,60 @@
+---
+title: "computational musicology week 7"
+author: "Lyke Esselink"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+# Loading data
+
+```{r}
+ninetiesMom <- read.csv(file = '90’s_mom_energy.csv')
+ninetiesMom
+```
+
+
+```{r}
+ninetiesMom %>%
+  summarise(
+    mean_speechiness = mean(Speechiness),
+    mean_acousticness = mean(Acousticness),
+    mean_liveness = mean(Liveness),
+    sd_speechiness = sd(Speechiness),
+    sd_acousticness = sd(Acousticness),
+    sd_liveness = sd(Liveness),
+    median_speechiness = median(Speechiness),
+    median_acousticness = median(Acousticness),
+    median_liveness = median(Liveness),
+    mad_speechiness = mad(Speechiness),
+    mad_acousticness = mad(Acousticness),
+    mad_liveness = mad(Liveness)
+  )
+```
+
+
+# Breakout 3
+
+```{r}
+grammy <- read.csv(file = 'The_GRAMMYs_Official_Playlist.csv')
+edison <- read.csv(file = 'Edisons_Pop_2026.csv')
+```
+
+
+```{r}
+awards <-
+  bind_rows(
+    grammy |> mutate(Category = "Grammys"),
+    edison |> mutate(Category = "Edisons")
+  )
+awards
+```
+
+```{r}
+grammy |> ggplot(aes(x = Energy)) + geom_histogram(binwidth = 0.1)
+```
+

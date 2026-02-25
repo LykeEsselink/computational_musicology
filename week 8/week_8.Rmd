@@ -1,0 +1,90 @@
+---
+title: "week_8"
+author: "Lyke Esselink"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# remotes::install_github('jaburgoyne/compmus')
+```
+```{r}
+library(tidyverse)
+library(compmus)
+```
+
+```{r}
+wood <- read_csv("../dat/wood.csv")
+```
+```{r}
+wood |>
+  compmus_wrangle_chroma() |> 
+  mutate(pitches = map(pitches, compmus_normalise, "euclidean")) |>
+  compmus_gather_chroma() |> 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+```
+
+
+# breakout 3
+
+```{r}
+## The Tallis Scholars
+tallis <- read_csv("../dat/tallis.csv")
+## La Chapelle Royale
+chapelle <- read_csv("../dat/chapelle.csv")
+## Oxford Camerata
+oxford <- read_csv("../dat/oxford.csv")
+## Chanticleer
+chanticleer <- read_csv("../dat/chanticleer.csv")
+## The Hilliard Ensemble
+hilliard <- read_csv("../dat/hilliard.csv")
+## The Gabrieli Consort
+gabrieli <- read_csv("../dat/gabrieli.csv")
+```
+
+```{r}
+compmus_long_distance(
+  tallis |> 
+    compmus_wrangle_chroma() |> 
+    mutate(pitches = map(pitches, compmus_normalise, "chebyshev")) |> 
+    filter(row_number() %% 50L == 0L),
+  chapelle |> 
+    compmus_wrangle_chroma() |> 
+    mutate(pitches = map(pitches, compmus_normalise, "chebyshev")) |> 
+    filter(row_number() %% 50L == 0L),
+  feature = pitches,
+  method = "euclidean"
+) |>
+  filter(!is.nan(d)) |> 
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = 50 * xduration,
+      y = ystart + yduration / 2,
+      height = 50 * yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_equal() +
+  labs(x = "The Tallis Scholars", y = "La Chapelle Royale") +
+  theme_minimal() +
+  scale_fill_viridis_c(guide = NULL)
+```
+
+
