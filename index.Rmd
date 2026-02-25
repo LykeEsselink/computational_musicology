@@ -16,6 +16,15 @@ library(plotly)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+### Welcome to my main page!
+
+This is the main page. I can introduce people to my portfolio here.
+
+***
+
+In the sidebar, I can explain more things.
+
+
 ### R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
