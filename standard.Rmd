@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "Standard R markdown document"
 author: "Lyke Esselink"
 date: "`r Sys.Date()`"
 output: html_document

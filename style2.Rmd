@@ -1,22 +1,10 @@
 ---
-title: "My portfolio (Style 1)"
+title: "My portfolio (Style 2)"
 author: "Lyke Esselink"
-format:
-  dashboard:
-    orientation: columns
+output: 
+  flexdashboard::flex_dashboard:
+    storyboard: true
 ---
-
-```{r imports}
-library(plotly)
-library(tidyverse)
-library(compmus)
-```
-
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 
 # Welcome to my main page!
 
