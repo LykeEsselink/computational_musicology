@@ -5,9 +5,7 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
-```{r}
-# remotes::install_github('jaburgoyne/compmus')
-```
+
 ```{r}
 library(tidyverse)
 library(compmus)
